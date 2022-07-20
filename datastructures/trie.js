@@ -1,7 +1,3 @@
-class Trie {
-
-
-  
-}
+class Trie {}
 
 module.exports = Trie;
