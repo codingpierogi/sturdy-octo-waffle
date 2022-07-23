@@ -1,4 +1,4 @@
-const Stack = require("./stack");
+import { Stack } from "./stack";
 
 test("Stack should be empty when initialized", () => {
   const stack = new Stack();

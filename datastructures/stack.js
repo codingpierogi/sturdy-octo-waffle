@@ -1,4 +1,4 @@
-class Stack {
+export class Stack {
   #index = 0;
   #stack = [];
 
@@ -22,5 +22,3 @@ class Stack {
     return this.#stack[this.#index - 1];
   }
 }
-
-module.exports = Stack;
