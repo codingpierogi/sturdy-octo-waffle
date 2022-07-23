@@ -1,4 +1,4 @@
-const Trie = require("./trie");
+import { Trie } from "./trie";
 
 test("Trie root TrieNode should not be null", () => {
   const trie = new Trie();
