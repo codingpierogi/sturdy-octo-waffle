@@ -5,6 +5,9 @@
     "test": "jest",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "treeify": "^1.1.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",

@@ -1,11 +1,11 @@
 import { Trie } from "./trie";
 
-test("Trie root TrieNode should not be null", () => {
+xtest("Trie root TrieNode should not be null", () => {
   const trie = new Trie();
   expect(trie.root).not.toBe(null);
 });
 
-test("Trie root TrieNode should be initialized", () => {
+xtest("Trie root TrieNode should be initialized", () => {
   const trie = new Trie();
   expect(trie.root.endOfWord).toBe(false);
   expect(trie.root.children).toEqual(
@@ -13,18 +13,18 @@ test("Trie root TrieNode should be initialized", () => {
   );
 });
 
-test("Trie.has should return false when missing word", () => {
+xtest("Trie.has should return false when missing word", () => {
   const trie = new Trie();
   expect(trie.has("the")).toBe(false);
 });
 
-test("Trie.has should return true when word inserted", () => {
+xtest("Trie.has should return true when word inserted", () => {
   const trie = new Trie();
   trie.insert("the");
   expect(trie.has("the")).toBe(true);
 });
 
-test("Trie should correctly insert and search itself", () => {
+xtest("Trie should insert and search words", () => {
   const words = ["the", "a", "there", "answer", "any", "by", "bye", "their"];
   const trie = new Trie();
   trie.insertAll(words);
@@ -32,4 +32,33 @@ test("Trie should correctly insert and search itself", () => {
   expect(trie.has("these")).toBe(false);
   expect(trie.has("their")).toBe(true);
   expect(trie.has("thaw")).toBe(false);
+});
+
+test("Trie should remove word heroic", () => {
+  const words = ["heroic", "hero", "heroine"];
+  const trie = new Trie();
+  trie.insertAll(words);
+  expect(trie.remove("heroic")).toBe(true);
+  console.log(trie.toString());
+  expect(trie.has("heroic")).toBe(false);
+  expect(trie.has("hero")).toBe(true);
+  expect(trie.has("heroine")).toBe(true);
+});
+
+xtest("Trie should remove word hero", () => {
+  const words = ["heroic", "hero", "heroine"];
+  const trie = new Trie();
+  trie.insertAll(words);
+  expect(trie.remove("hero")).toBe(true);
+  console.log(trie.toString());
+  expect(trie.has("heroic")).toBe(true);
+  expect(trie.has("hero")).toBe(false);
+  expect(trie.has("heroine")).toBe(true);
+});
+
+xtest("Trie should return false when word to remove is not present", () => {
+  const words = ["heroic", "hero", "heroine"];
+  const trie = new Trie();
+  trie.insertAll(words);
+  expect(trie.remove("yoyo")).toBe(false);
 });
