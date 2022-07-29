@@ -1,7 +1,5 @@
 import treeify from "treeify";
 
-import { Stack } from "./stack";
-
 // Time Complexity: Insert/Search O(key_length)
 // Space Complexity: O(alphabet_size * key_length * N)
 //                   where N is the number of keys in the Trie
@@ -13,6 +11,10 @@ class TrieNode {
     this.endOfWord = false;
     this.children = Array(ALPHABET_SIZE).fill(null);
     this.value = value;
+  }
+
+  get isEmpty() {
+    return this.children.every((c) => c === null);
   }
 
   toString() {
@@ -50,31 +52,23 @@ export class Trie {
     currentNode.endOfWord = true;
   }
 
-  remove(word) {
-    let currentNode = this.root;
-    const letters = this.#splitLetters(word);
-    const stack = new Stack();
-    //console.log("word", letters);
-    for (const letter of letters) {
-      const key = this.#hashKey(letter);
-      console.log(`[letter=${letter}] [key=${key}]`);
-      if (!currentNode.children[key]) return false;
-
-      stack.push({ node: currentNode, key, value: currentNode.value });
-      currentNode = currentNode.children[key];
+  remove(word, node = this.root, depth = 0) {
+    if (!node) {
+      return;
     }
 
-    while (!stack.isEmpty) {
-      const { node, key, value } = stack.pop();
-      console.log(`[node=${node}] [key=${key}] [value=${value}]`);
-
-      if (node.children[key].endOfWord) node.children[key].endOfWord = false;
-      if (node.children[key].children.every((c) => c === null)) {
-        node.children[key] = null;
-      }
+    if (depth === word.length) {
+      if (node.endOfWord) node.endOfWord = false;
+      if (node.isEmpty) node = null;
+      return node;
     }
 
-    return true;
+    const key = this.#hashKey(word[depth]);
+    node.children[key] = this.remove(word, node.children[key], depth + 1);
+
+    if (!node.endOfWord && node.isEmpty) node = null;
+
+    return node;
   }
 
   insertAll(words) {

@@ -34,23 +34,21 @@ xtest("Trie should insert and search words", () => {
   expect(trie.has("thaw")).toBe(false);
 });
 
-test("Trie should remove word heroic", () => {
-  const words = ["heroic", "hero", "heroine"];
+test("Trie should remove word heroicomic", () => {
+  const words = ["heroicomic", "hero", "herobrine"];
   const trie = new Trie();
   trie.insertAll(words);
-  expect(trie.remove("heroic")).toBe(true);
-  console.log(trie.toString());
-  expect(trie.has("heroic")).toBe(false);
+  trie.remove("heroicomic");
+  expect(trie.has("heroicomic")).toBe(false);
   expect(trie.has("hero")).toBe(true);
-  expect(trie.has("heroine")).toBe(true);
+  expect(trie.has("herobrine")).toBe(true);
 });
 
-xtest("Trie should remove word hero", () => {
+test("Trie should remove word hero", () => {
   const words = ["heroic", "hero", "heroine"];
   const trie = new Trie();
   trie.insertAll(words);
-  expect(trie.remove("hero")).toBe(true);
-  console.log(trie.toString());
+  trie.remove("hero");
   expect(trie.has("heroic")).toBe(true);
   expect(trie.has("hero")).toBe(false);
   expect(trie.has("heroine")).toBe(true);
